@@ -1,0 +1,2 @@
+body{background-color:#323232;color:#dcfadc;font-family:monospace;size:13px}.modebar{display:none!important}#mandelbrot{width:100vw;height:100vh;position:absolute;margin-left:0;margin-right:0;z-index:-1}#mandelnav{bottom:0;width:100%;text-align:center;background-color:rgba(0,0,0,.5)}#mandelnav,#status{position:absolute;left:0;padding:10px}#status{top:0;color:#c8dcc8}button{font-family:monospace;border:1px solid #4202cb;size:13px;background-color:#000;color:#dcfadc}
+/*# sourceMappingURL=/style.195d325e.css.map */
