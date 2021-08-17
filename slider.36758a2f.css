@@ -1,2 +1,0 @@
-.slider{-webkit-appearance:none;height:5px;background:#4202cb;outline:none;opacity:.7;-webkit-transition:.2s;transition:opacity .2s}.slider:hover{opacity:1;background:#c8c8c8}.slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:5px;height:10px;background:#2cb2cb;cursor:pointer}.slider:hover::-webkit-slider-thumb{background:#4202cb;border:1px solid #2cb2cb}
-/*# sourceMappingURL=/slider.36758a2f.css.map */
