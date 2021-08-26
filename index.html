@@ -1,35 +1,63 @@
 
+
 <html>
     <head>
         <script>
 window.onload = (() => {
+
+
+    /* Create a container with 50px padding and transparent black background. Inside the text "Hello world" is displayed. */
+    var container = document.createElement('div');
+    container.position = 'fixed';
+    container.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    container.style.padding = '5px';
+    container.style.color = 'black';
+    container.style.fontSize = '15px';
+    container.style.fontFamily = 'sans-serif';
+    document.body.appendChild(container);
+    
+    /* Create a link that refers to http://ec2-35-156-197-226.eu-central-1.compute.amazonaws.com:8050/ with the text "Dashboard for my master thesis". The font color should be white */
+    var link = document.createElement('a');
+    link.href = 'http://ec2-35-156-197-226.eu-central-1.compute.amazonaws.com:8050/';
+    link.innerHTML = 'Dashboard for my master thesis';
+    // link.style.color = 'white';
+    container.appendChild(link);
+    
+    /* Create a paragraph that says "Press space to pause the animation, press Enter (often) to speed it up (more), and click anywhere to mark a target" */
+    var paragraph = document.createElement('p');
+    paragraph.innerHTML = 'Press space to pause the animation, press Enter (often) to speed it up (more), and click anywhere to mark a target';
+    container.appendChild(paragraph);
+
     /* Create a 2d canvas to render the mandelbrot set in. The rendering happens in a function that takes xMin, xMax, yMin, yMax. */
     var canvas = document.createElement('canvas');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    // canvas.style.position = 'fixed';
+    // canvas.style.top = 0;
+    // canvas.style.left = 0;
     document.body.appendChild(canvas);
     var ctx = canvas.getContext('2d');
     function renderMandelbrot(xMin, xMax, yMin, yMax) {
-    var xStep = (xMax - xMin) / canvas.width;
-    var yStep = (yMax - yMin) / canvas.height;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (var x = 0; x < canvas.width; x++) {
-        for (var y = 0; y < canvas.height; y++) {
-        var x0 = xMin + x * xStep;
-        var y0 = yMin + y * yStep;
-        var x1 = x0;
-        var y1 = y0;
-        var iteration = 0;
-        while (x1 * x1 + y1 * y1 < 4 && iteration < 100) {
-            var xtemp = x1 * x1 - y1 * y1 + x0;
-            y1 = 2 * x1 * y1 + y0;
-            x1 = xtemp;
-            iteration++;
+        var xStep = (xMax - xMin) / canvas.width;
+        var yStep = (yMax - yMin) / canvas.height;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var x = 0; x < canvas.width; x++) {
+            for (var y = 0; y < canvas.height; y++) {
+                var x0 = xMin + x * xStep;
+                var y0 = yMin + y * yStep;
+                var x1 = x0;
+                var y1 = y0;
+                var iteration = 0;
+                while (x1 * x1 + y1 * y1 < 4 && iteration < 100) {
+                    var xtemp = x1 * x1 - y1 * y1 + x0;
+                    y1 = 2 * x1 * y1 + y0;
+                    x1 = xtemp;
+                    iteration++;
+                }
+                ctx.fillStyle = 'hsl(' +20+  Math.round(iteration/1.5) + ', 100%, 50%)';
+                ctx.fillRect(x, y, 1, 1);
+            }
         }
-        ctx.fillStyle = 'hsl(' + iteration + ', 100%, 50%)';
-        ctx.fillRect(x, y, 1, 1);
-        }
-    }
     }
 
     /* Use global variables to track the x- and y-range. Initially, it is set to [-1.5, 1.5] for x and [-1, 1] for y. */
@@ -77,8 +105,15 @@ window.onload = (() => {
         zoom(xTarget, yTarget, scale);
     }, 50);
     /* Add a reset button. If the reset button is pressed,  the x- and y-limits are reset to their initial values. */
+    /* Create a button that says "Reset". It is always visible in the top right of the screen, has a 10px padding, and has a half-transparent black background with white font. */
     var resetButton = document.createElement('button');
     resetButton.innerHTML = 'Reset';
+    resetButton.style.padding = '10px';
+    resetButton.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    resetButton.style.color = 'white';
+    resetButton.style.position = 'fixed';
+    resetButton.style.top = 0;
+    resetButton.style.right = 0;
     document.body.appendChild(resetButton);
     resetButton.addEventListener('click', function() {
         xMin = -1.5;
@@ -107,16 +142,11 @@ window.onload = (() => {
         renderMandelbrot(xMin, xMax, yMin, yMax);
     }
     });
+    
+    
 });
         </script>
     </head>
     <body style="margin: 0;">
-        <div>
-            <a href="http://ec2-35-156-197-226.eu-central-1.compute.amazonaws.com:8050/">Dashboard for my master thesis</a>
-        </div>
-        <p>
-            Press space to pause the animation, press Enter (often) to speed it up (more), and click anywhere to mark a target
-        </p>
-        
     </body>
 </html>
