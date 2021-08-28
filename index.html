@@ -5,7 +5,7 @@
         <script>
 window.onload = (() => {
 
-
+    
     /* Create a container with 50px padding and transparent black background. Inside the text "Hello world" is displayed. */
     var container = document.createElement('div');
     container.position = 'fixed';
@@ -32,6 +32,10 @@ window.onload = (() => {
     var canvas = document.createElement('canvas');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    var XMIN = -2;
+    var XMAX = 1;
+    var YMAX = 1.5 * canvas.height / canvas.width;
     // canvas.style.position = 'fixed';
     // canvas.style.top = 0;
     // canvas.style.left = 0;
@@ -83,15 +87,6 @@ window.onload = (() => {
         renderMandelbrot(xMin, xMax, yMin, yMax);
     };
 
-    /* Use global variables to track the x- and y-range. Initially, it is set to [-2, 1] for x and [-1, 1] for y. */
-    var xMin = -2;
-    var xMax = 1;
-    var yMin = -1;
-    var yMax = 1;
-
-    /* Render the mandelbrot set. */
-    renderMandelbrot(xMin, xMax, yMin, yMax);
-
     /* create a new function zoom(x, y, scale). This function computes sets the new x- and y-limits , such that xMin = (1-scale)*xMin + scale*x */
     function zoom(x, y, scale) {
         xMin = (1 - scale) * xMin + scale * x;
@@ -138,13 +133,14 @@ window.onload = (() => {
     resetButton.style.top = 0;
     resetButton.style.right = 0;
     document.body.appendChild(resetButton);
-    resetButton.addEventListener('click', function() {
-        xMin = -1.5;
-        xMax = 1.5;
-        yMin = -1;
-        yMax = 1;
+    function reset() {
+        xMin = XMIN;
+        xMax = XMAX;
+        yMin = -YMAX;
+        yMax = YMAX;
         renderMandelbrot(xMin, xMax, yMin, yMax);
-    });
+    }
+    resetButton.addEventListener('click', reset);
     /* If the user presses the right arrow key, xMin and Max are shifted by += 0.1 * (xMax - xMin). Likewise for the left arrow key (now subtract the value) and for the up/down keys (for the y-axis) */
     document.addEventListener('keydown', function(e) {
     if (e.keyCode == 39) {
@@ -166,6 +162,7 @@ window.onload = (() => {
     }
     });
     
+    reset();
     
 });
         </script>
