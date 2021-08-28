@@ -37,6 +37,7 @@ window.onload = (() => {
     // canvas.style.left = 0;
     document.body.appendChild(canvas);
     var ctx = canvas.getContext('2d');
+    var colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3'];
     function renderMandelbrot(xMin, xMax, yMin, yMax) {
         var xStep = (xMax - xMin) / canvas.width;
         var yStep = (yMax - yMin) / canvas.height;
@@ -54,15 +55,37 @@ window.onload = (() => {
                     x1 = xtemp;
                     iteration++;
                 }
-                ctx.fillStyle = 'hsl(' +20+  Math.round(iteration/1.5) + ', 100%, 50%)';
+                ctx.fillStyle = colors[iteration % colors.length];                
                 ctx.fillRect(x, y, 1, 1);
             }
         }
     }
 
-    /* Use global variables to track the x- and y-range. Initially, it is set to [-1.5, 1.5] for x and [-1, 1] for y. */
-    var xMin = -1.5;
-    var xMax = 1.5;
+    /* Create an input field for the number of colors that should be used to render the mandelbrot set. */
+    var input = document.createElement('input');
+    var colorPicker = document.createElement('div');
+    input.type = 'number';
+    input.value = 6;
+    colorPicker.appendChild(input);
+    var label = document.createElement('label');
+    label.innerHTML = 'Colors';
+    colorPicker.appendChild(label);
+    document.body.appendChild(colorPicker);
+    document
+    input.onchange = function() {
+        colors = [];
+        for (var i = 0; i < input.value; i++) {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            colors.push('#' + ('00' + r.toString(16)).slice(-2) + ('00' + g.toString(16)).slice(-2) + ('00' + b.toString(16)).slice(-2));
+        }
+        renderMandelbrot(xMin, xMax, yMin, yMax);
+    };
+
+    /* Use global variables to track the x- and y-range. Initially, it is set to [-2, 1] for x and [-1, 1] for y. */
+    var xMin = -2;
+    var xMax = 1;
     var yMin = -1;
     var yMax = 1;
 
