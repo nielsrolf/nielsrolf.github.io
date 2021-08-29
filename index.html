@@ -3,6 +3,10 @@
 <html>
     <head>
         <script>
+    /* Check if the current url contains "/thesis". If so, redirect to http://ec2-35-156-197-226.eu-central-1.compute.amazonaws.com:8050/ */
+    if (window.location.href.indexOf('/thesis') !== -1) {
+        window.location.href = 'http://ec2-35-156-197-226.eu-central-1.compute.amazonaws.com:8050/';
+    }
 window.onload = (() => {
 
     
