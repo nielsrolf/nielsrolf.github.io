@@ -15,10 +15,9 @@
                 flex-direction: row;
                 justify-content: space-around;
             }
-            /* body {
-                /* disable all scroll bars */
-                overflow: 'hidden';
-            } */
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
         </style>
         <script>
 /* Check if the current get-parameters contain the word thesis, if so redirect to the dashboard */
@@ -37,7 +36,7 @@ window.onload = (() => {
     container.style.padding = '5px';
     container.style.color = 'black';
     container.style.fontSize = '15px';
-    container.style.fontFamily = 'sans-serif';
+    // container.style.fontFamily = 'sans-serif';
     document.body.appendChild(container);
 
     /* Create a link that refers to http://ec2-35-156-197-226.eu-central-1.compute.amazonaws.com:8050/ with the text "Dashboard for my master thesis". The font color should be white */
