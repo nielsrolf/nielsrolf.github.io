@@ -11,7 +11,7 @@ if (params.get('thesis') != null) {
 
 window.onload = (() => {
 
-    
+
     /* Create a container with 50px padding and transparent black background. Inside the text "Hello world" is displayed. */
     var container = document.createElement('div');
     container.position = 'fixed';
@@ -21,14 +21,14 @@ window.onload = (() => {
     container.style.fontSize = '15px';
     container.style.fontFamily = 'sans-serif';
     document.body.appendChild(container);
-    
+
     /* Create a link that refers to http://ec2-35-156-197-226.eu-central-1.compute.amazonaws.com:8050/ with the text "Dashboard for my master thesis". The font color should be white */
     var link = document.createElement('a');
     link.href = 'http://ec2-35-156-197-226.eu-central-1.compute.amazonaws.com:8050/';
     link.innerHTML = 'Dashboard for my master thesis';
     // link.style.color = 'white';
     container.appendChild(link);
-    
+
     /* Create a paragraph that says "Press space to pause the animation, press Enter (often) to speed it up (more), and click anywhere to mark a target" */
     var paragraph = document.createElement('p');
     paragraph.innerHTML = 'Press space to pause the animation, press Enter (often) to speed it up (more), and click anywhere to mark a target';
@@ -47,13 +47,17 @@ window.onload = (() => {
     // canvas.style.left = 0;
     document.body.appendChild(canvas);
     var ctx = canvas.getContext('2d');
+
+    const pointSize = 5;
+    const stride = 5;
+
     var colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3'];
     function renderMandelbrot(xMin, xMax, yMin, yMax) {
         var xStep = (xMax - xMin) / canvas.width;
         var yStep = (yMax - yMin) / canvas.height;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (var x = 0; x < canvas.width; x++) {
-            for (var y = 0; y < canvas.height; y++) {
+        ctx.clearRect(0, 0, canvas.width * .2, canvas.height * .2);
+        for (var x = 0; x < canvas.width; x+=stride) {
+            for (var y = 0; y < canvas.height; y+=stride) {
                 var x0 = xMin + x * xStep;
                 var y0 = yMin + y * yStep;
                 var x1 = x0;
@@ -65,26 +69,28 @@ window.onload = (() => {
                     x1 = xtemp;
                     iteration++;
                 }
-                ctx.fillStyle = colors[iteration % colors.length];                
-                ctx.fillRect(x, y, 1, 1);
+                ctx.fillStyle = colors[iteration % colors.length];
+                ctx.fillRect(x, y, pointSize, pointSize);
             }
         }
     }
 
-    /* Create an input field for the number of colors that should be used to render the mandelbrot set. */
-    var input = document.createElement('input');
+    /* Create an colorInput field for the number of colors that should be used to render the mandelbrot set. */
+    var colorInput = document.createElement('input');
     var colorPicker = document.createElement('div');
-    input.type = 'number';
-    input.value = 6;
-    colorPicker.appendChild(input);
+    colorInput.type = 'number';
+    colorInput.value = 6;
+    colorPicker.appendChild(colorInput);
     var label = document.createElement('label');
     label.innerHTML = 'Colors';
     colorPicker.appendChild(label);
     document.body.appendChild(colorPicker);
-    document
-    input.onchange = function() {
+
+
+
+    colorInput.onchange = function() {
         colors = [];
-        for (var i = 0; i < input.value; i++) {
+        for (var i = 0; i < colorInput.value; i++) {
             var r = Math.floor(Math.random() * 256);
             var g = Math.floor(Math.random() * 256);
             var b = Math.floor(Math.random() * 256);
@@ -167,9 +173,9 @@ window.onload = (() => {
         renderMandelbrot(xMin, xMax, yMin, yMax);
     }
     });
-    
+
     reset();
-    
+
 });
         </script>
     </head>
