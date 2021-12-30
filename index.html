@@ -34,6 +34,39 @@ window.onload = (() => {
     paragraph.innerHTML = 'Press space to pause the animation, press Enter (often) to speed it up (more), and click anywhere to mark a target';
     container.appendChild(paragraph);
 
+    /* Create an colorInput field for the number of colors that should be used to render the mandelbrot set. */
+    var colorInput = document.createElement('input');
+    var colorPicker = document.createElement('div');
+    colorInput.type = 'number';
+    colorInput.value = 3;
+    colorPicker.appendChild(colorInput);
+    var label = document.createElement('label');
+    label.innerHTML = 'Colors';
+    colorPicker.appendChild(label);
+    document.body.appendChild(colorPicker);
+    let colors = [];
+
+    function getColors() {
+        // colors = [];
+        // for (let i = 0; i < colorInput.value; i++) {
+        //     colors.push(`hsl(${i * 360 / colorInput.value}, 100%, 50%)`);
+        // }
+        colors = [];
+        for (var i = 0; i < colorInput.value; i++) {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            colors.push('#' + ('00' + r.toString(16)).slice(-2) + ('00' + g.toString(16)).slice(-2) + ('00' + b.toString(16)).slice(-2));
+        }
+    }
+
+    getColors();
+
+    colorInput.onchange = function() {
+        getColors();
+        renderMandelbrot(xMin, xMax, yMin, yMax);
+    };
+
     /* Create a 2d canvas to render the mandelbrot set in. The rendering happens in a function that takes xMin, xMax, yMin, yMax. */
     var canvas = document.createElement('canvas');
     canvas.width = window.innerWidth;
@@ -51,7 +84,6 @@ window.onload = (() => {
     const pointSize = 5;
     const stride = 5;
 
-    var colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3'];
     function renderMandelbrot(xMin, xMax, yMin, yMax) {
         var xStep = (xMax - xMin) / canvas.width;
         var yStep = (yMax - yMin) / canvas.height;
@@ -75,29 +107,6 @@ window.onload = (() => {
         }
     }
 
-    /* Create an colorInput field for the number of colors that should be used to render the mandelbrot set. */
-    var colorInput = document.createElement('input');
-    var colorPicker = document.createElement('div');
-    colorInput.type = 'number';
-    colorInput.value = 6;
-    colorPicker.appendChild(colorInput);
-    var label = document.createElement('label');
-    label.innerHTML = 'Colors';
-    colorPicker.appendChild(label);
-    document.body.appendChild(colorPicker);
-
-
-
-    colorInput.onchange = function() {
-        colors = [];
-        for (var i = 0; i < colorInput.value; i++) {
-            var r = Math.floor(Math.random() * 256);
-            var g = Math.floor(Math.random() * 256);
-            var b = Math.floor(Math.random() * 256);
-            colors.push('#' + ('00' + r.toString(16)).slice(-2) + ('00' + g.toString(16)).slice(-2) + ('00' + b.toString(16)).slice(-2));
-        }
-        renderMandelbrot(xMin, xMax, yMin, yMax);
-    };
 
     /* create a new function zoom(x, y, scale). This function computes sets the new x- and y-limits , such that xMin = (1-scale)*xMin + scale*x */
     function zoom(x, y, scale) {
