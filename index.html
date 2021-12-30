@@ -2,6 +2,24 @@
 
 <html>
     <head>
+        <style>
+            div.controls {
+                color: white;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+            /* body {
+                /* disable all scroll bars */
+                overflow: 'hidden';
+            } */
+        </style>
         <script>
 /* Check if the current get-parameters contain the word thesis, if so redirect to the dashboard */
 var params = new URLSearchParams(window.location.search);
@@ -34,23 +52,13 @@ window.onload = (() => {
     paragraph.innerHTML = 'Press space to pause the animation, press Enter (often) to speed it up (more), and click anywhere to mark a target';
     container.appendChild(paragraph);
 
-    /* Create an colorInput field for the number of colors that should be used to render the mandelbrot set. */
-    var colorInput = document.createElement('input');
-    var colorPicker = document.createElement('div');
-    colorInput.type = 'number';
-    colorInput.value = 3;
-    colorPicker.appendChild(colorInput);
-    var label = document.createElement('label');
-    label.innerHTML = 'Colors';
-    colorPicker.appendChild(label);
-    document.body.appendChild(colorPicker);
+    var colorInput = document.getElementById('color-input');
+    var sizeInput = document.getElementById('size-input');
+    var strideInput = document.getElementById('stride-input');
+
     let colors = [];
 
     function getColors() {
-        // colors = [];
-        // for (let i = 0; i < colorInput.value; i++) {
-        //     colors.push(`hsl(${i * 360 / colorInput.value}, 100%, 50%)`);
-        // }
         colors = [];
         for (var i = 0; i < colorInput.value; i++) {
             var r = Math.floor(Math.random() * 256);
@@ -81,13 +89,17 @@ window.onload = (() => {
     document.body.appendChild(canvas);
     var ctx = canvas.getContext('2d');
 
-    const pointSize = 5;
-    const stride = 5;
+    
 
     function renderMandelbrot(xMin, xMax, yMin, yMax) {
+        let pointSize = +sizeInput.value;
+        let stride = +strideInput.value;
+        stride = Math.max(stride, pointSize, 1);
+        console.log(sizeInput.value);
+        console.log(strideInput.value);
         var xStep = (xMax - xMin) / canvas.width;
         var yStep = (yMax - yMin) / canvas.height;
-        ctx.clearRect(0, 0, canvas.width * .2, canvas.height * .2);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (var x = 0; x < canvas.width; x+=stride) {
             for (var y = 0; y < canvas.height; y+=stride) {
                 var x0 = xMin + x * xStep;
@@ -185,9 +197,25 @@ window.onload = (() => {
 
     reset();
 
+    document.body.appendChild(controls);
+
 });
         </script>
     </head>
     <body style="margin: 0;">
+        <div class="controls">
+            <div class="control">
+                <label for="size">Point Size</label>
+                <input id="size-input" type="range" id="size" min="1" max="10" value="5" step="1">
+            </div>
+            <div class="control">
+                <label for="stride">Stride</label>
+                <input id="stride-input" type="range" id="stride" min="1" max="10" value="5" step="1">
+            </div>
+            <div class="control">
+                <label for="colors">Colors</label>
+                <input  id="color-input" type="range" id="colors" min="1" max="10" value="3" step="1">
+            </div>
+        </div>
     </body>
 </html>
