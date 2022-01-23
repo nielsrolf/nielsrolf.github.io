@@ -1,0 +1,241 @@
+
+
+<html>
+    <head>
+        <style>
+            div.controls {
+                color: white;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            div#mandelbrot {
+                height: 100vh;
+                width: 100vw;
+                position: relative;
+            }
+
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
+        <script>
+
+
+function init_mandelbrot() {
+    /* Create a container with 50px padding and transparent black background. Inside the text "Hello world" is displayed. */
+    var root = document.getElementById('mandelbrot');
+
+    var colorInput = document.getElementById('color-input');
+    var sizeInput = document.getElementById('size-input');
+    var strideInput = document.getElementById('stride-input');
+
+    let colors = [];
+
+    function getColors() {
+        colors = [];
+        for (var i = 0; i < colorInput.value; i++) {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            colors.push('#' + ('00' + r.toString(16)).slice(-2) + ('00' + g.toString(16)).slice(-2) + ('00' + b.toString(16)).slice(-2));
+        }
+    }
+
+    getColors();
+
+    colorInput.onchange = function() {
+        getColors();
+        renderMandelbrot(xMin, xMax, yMin, yMax);
+    };
+
+    /* Create a 2d canvas to render the mandelbrot set in. The rendering happens in a function that takes xMin, xMax, yMin, yMax. */
+    var canvas = document.createElement('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    var XMIN = -2;
+    var XMAX = 1;
+    var YMAX = 1.5 * canvas.height / canvas.width;
+    // canvas.style.position = 'fixed';
+    // canvas.style.top = 0;
+    // canvas.style.left = 0;
+    root.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+
+    
+
+    function renderMandelbrot(xMin, xMax, yMin, yMax) {
+        let pointSize = +sizeInput.value;
+        let stride = +strideInput.value;
+        stride = Math.max(stride, pointSize, 1);
+        var xStep = (xMax - xMin) / canvas.width;
+        var yStep = (yMax - yMin) / canvas.height;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var x = 0; x < canvas.width; x+=stride) {
+            for (var y = 0; y < canvas.height; y+=stride) {
+                var x0 = xMin + x * xStep;
+                var y0 = yMin + y * yStep;
+                var x1 = x0;
+                var y1 = y0;
+                var iteration = 0;
+                while (x1 * x1 + y1 * y1 < 4 && iteration < 100) {
+                    var xtemp = x1 * x1 - y1 * y1 + x0;
+                    y1 = 2 * x1 * y1 + y0;
+                    x1 = xtemp;
+                    iteration++;
+                }
+                ctx.fillStyle = colors[iteration % colors.length];
+                ctx.fillRect(x, y, pointSize, pointSize);
+            }
+        }
+    }
+
+
+    /* create a new function zoom(x, y, scale). This function computes sets the new x- and y-limits , such that xMin = (1-scale)*xMin + scale*x */
+    function zoom(x, y, scale) {
+        xMin = (1 - scale) * xMin + scale * x;
+        xMax = (1 - scale) * xMax + scale * x;
+        yMin = (1 - scale) * yMin + scale * y;
+        yMax = (1 - scale) * yMax + scale * y;
+        renderMandelbrot(xMin, xMax, yMin, yMax);
+    }
+
+    /* Use global variables to track the current target position. The user can set the target position by clicking on the canvas. Initially, the target is xTarget = -1.5, yTarget=0 */
+    var xTarget = -2; // previously -1.5
+    var yTarget = 0;
+
+    /* If the user clicks on the canvas, the click position is evaluated and converted such that left=xMin, right=xMax. The click coordinates become the new target position. */
+    canvas.addEventListener('click', function(e) {
+        const rect = canvas.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+        
+        xTarget = xMin + x * (xMax - xMin) / canvas.width;
+        yTarget = yMin + y * (yMax - yMin) / canvas.height;
+    });
+
+    /* Create a global variable that tracks the scaling factor. Initially, it is 0.01. When the user presses enter, it increases by 0.01 and if the user presses space, it is set to 0. */
+    var scale = 0.01;
+        document.addEventListener('keydown', function(e) {
+        if (e.keyCode == 13) {
+            scale += 0.01;
+        } else if (e.keyCode == 32) {
+            scale = 0;
+        }
+    });
+
+    /* Every 50 milliseconds, zoom to the current target position. */
+    setInterval(function() {
+        zoom(xTarget, yTarget, scale);
+    }, 50);
+    /* Add a reset button. If the reset button is pressed,  the x- and y-limits are reset to their initial values. */
+    /* Create a button that says "Reset". It is always visible in the top right of the screen, has a 10px padding, and has a half-transparent black background with white font. */
+    var resetButton = document.getElementById('restart-mandelbrot');
+    resetButton.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    resetButton.style.color = 'white';
+    function reset() {
+        xMin = XMIN;
+        xMax = XMAX;
+        yMin = -YMAX;
+        yMax = YMAX;
+        renderMandelbrot(xMin, xMax, yMin, yMax);
+    }
+    resetButton.addEventListener('click', reset);
+    /* If the user presses the right arrow key, xMin and Max are shifted by += 0.1 * (xMax - xMin). Likewise for the left arrow key (now subtract the value) and for the up/down keys (for the y-axis) */
+    document.addEventListener('keydown', function(e) {
+    if (e.keyCode == 39) {
+        xMin += 0.1 * (xMax - xMin);
+        xMax += 0.1 * (xMax - xMin);
+        renderMandelbrot(xMin, xMax, yMin, yMax);
+    } else if (e.keyCode == 37) {
+        xMin -= 0.1 * (xMax - xMin);
+        xMax -= 0.1 * (xMax - xMin);
+        renderMandelbrot(xMin, xMax, yMin, yMax);
+    } else if (e.keyCode == 38) {
+        yMin -= 0.1 * (yMax - yMin);
+        yMax -= 0.1 * (yMax - yMin);
+        renderMandelbrot(xMin, xMax, yMin, yMax);
+    } else if (e.keyCode == 40) {
+        yMin += 0.1 * (yMax - yMin);
+        yMax += 0.1 * (yMax - yMin);
+        renderMandelbrot(xMin, xMax, yMin, yMax);
+    }
+    });
+
+    reset();
+
+
+}
+
+
+</script>
+    </head>
+    <body style="margin: 0;">
+
+        <div class="main">
+            <h1>Niels Warncke</h1>
+            <h3>Programming | Machine Learning | Art</h3>
+            <p>Hi, I am Niels Warncke. In the last years, I have worked and played a lot with neural networks and audio data, and I am interested in many topics related to research about and art with machine learning.
+            
+            </p>
+
+            <h2>Projects</h3>
+            <div class="entry">
+                <h3>Experiments with DDSP autoencoders</h3>
+            </div>
+            <div class="entry">
+                <h3>Generative art for everyone: pollinations.ai</h3>
+            </div>
+            <div class="entry">
+                <h3>StyleGAN-3 Dance & VQ-GAN Dance</h3>
+            </div>
+            <div class="entry">
+                <h3>Interpretable image classifiers: LRP</h3>
+            </div>
+            <div class="entry">
+                <h3>An interctive mandelbrot zoomer - generative art meta</h3>
+                <div id='mandelbrot'>
+                    <div style="text-align: center; width: 100%; padding-top: 5;">Press space to pause the animation, press Enter (often) to speed it up (more), and click anywhere to mark a target</div>
+                    <div id='mandelbrot-controls' class="controls">
+                        <div class="control">
+                            <label for="size">Point Size</label>
+                            <input id="size-input" type="range" id="size" min="1" max="10" value="5" step="1">
+                        </div>
+                        <div class="control">
+                            <label for="stride">Stride</label>
+                            <input id="stride-input" type="range" id="stride" min="1" max="10" value="5" step="1">
+                        </div>
+                        <div class="control">
+                            <label for="colors">Colors</label>
+                            <input  id="color-input" type="range" id="colors" min="1" max="10" value="3" step="1">
+                        </div>
+                        <div class="control">
+                            <button id='restart-mandelbrot'>Reset</button>
+                        </div>
+                    </div>
+                </div><script type="text/javascript">init_mandelbrot();</script>
+            </div>
+            <div class="entry">
+                <h3>Flowing Water, by GPT - A.R. Ammons </h3>
+            </div>
+            <div class="entry">
+                <h3>A semi-successless aproach for image transcription (CLIP+GPT-2)</h3>
+            </div>
+
+            <div class="entry">
+                <h3>Visualizing the shape of a decision surface of an image classifiers</h3>
+            </div>
+
+            <h2>Education</h2>
+
+
+            <h2>Work experience</h2>
+            
+        </div>
+    </body>
+</html>
