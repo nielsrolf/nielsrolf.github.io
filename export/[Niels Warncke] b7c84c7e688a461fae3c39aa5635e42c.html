@@ -1,0 +1,686 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>[Niels Warncke]</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="90f3b9ba-366e-4a38-8073-58fa5383cc3b" class="page mono"><header><h1 class="page-title">[Niels Warncke]</h1></header><div class="page-body"><p id="1468a120-bd42-428f-b6e5-67d2748a743b" class="">Hi, I am Niels. In the last years, I have worked and played a lot with neural networks and audio data, and I am interested in many topics related to research and art with machine learning. If you want to get in touch, send me a mail: niels . warncke at gmail</p><ul id="3c178528-d93e-44da-b978-fa4a571af30c" class="toggle"><li><details open=""><summary>Projects<strong> </strong>👨‍💻</summary><p id="9b4a7125-cf91-4151-92d8-709b59c1cc1b" class="">I categorized the projects into those that actually had a cool output - which might be interesting also from an artistic point of view - and others that consist mainly out of code and ideas.</p><p id="e1b1a5c2-5754-4070-862f-ffab507c657c" class="">You can also check out my <a href="http://github.com/nielsrolf">github profile</a>, there are some more over there.</p><ul id="5c66159b-140a-4614-aaa2-2756428f1f04" class="toggle"><li><details open=""><summary>Machine Learning and Art</summary><p id="e9f7334b-97b2-482b-8019-b90d9040e4d4" class=""><strong>Experiments with DDSP autoencoders</strong><div class="indented"><p id="531623dd-af7d-4771-9c3d-062c51cb4962" class="">DDSP is short for <a href="https://openreview.net/forum?id=B1x1ma4tDr">Differential Digital Signal Processing</a>. It brings synthesizers and a lot of knowledge about sound into neural networks. In my <a href="https://github.com/nielsrolf/master_thesis/blob/main/thesis.pdf">master thesis</a>, I used DDSP to build a model that infers the timbre of an instrument from a short recording and then synthesizes new melodies with it in a one- or few-shot fashion. Besides, I also implemented a <a href="https://github.com/nielsrolf/ddsp/blob/master/ddsp/colab/experiments/fmsynth.ipynb">differentiable FM synthesizer</a> (<a href="https://soundcloud.com/nielsrolf/sets/fm-synth-tensorflow">🎵</a>) and tried - with no success - to use <a href="https://github.com/nielsrolf/ddsp/blob/master/ddsp/colab/experiments/09_ContrastiveLossAudioSynthesis.ipynb">DDSP in a GAN</a>.</p><p id="286bf6ac-4c6e-4c23-86d8-7948de35584c" class="">I also had a dashboard for the results of my thesis, but then I had some issues with my AWS account and took it all down. Remind me to put it back online.</p></div></p><p id="f86e5a1c-3374-4b96-a7ff-8eaf00fc3991" class=""><strong>Generative art for everyone: </strong><a href="http://pollinations.ai"><strong>pollinations.ai</strong></a><div class="indented"><p id="01312928-52c9-4d78-af48-f8bee7c53c21" class="">For a long time now, machine learning has enabled new ways of creating and modifying media in different modalities. In particular since the release of CLIP and dall-e, interest in generative media exploded. <a href="http://pollinations.ai">pollinations.ai</a> is an open source project that aims to make all of this accessible to everyone with a simple web interface. It has many text-to-image models but also some that work with video, text and audio. I am not the founder of <a href="https://github.com/pollinations">pollinations</a> (<a href="https://github.com/voodoohop">thomash</a> is), but I am a contributor to the<a href="https://github.com/pollinations/hive"> selection of models</a> available on the site as well as <a href="https://discord.gg/XXd99CrkCr">general discussions</a>.</p></div></p><p id="de4ac016-e16b-48c1-92cf-4756db712d57" class=""><strong>StyleGAN-3 Dance &amp; VQ-GAN Dance</strong><div class="indented"><p id="a62e1288-421e-4531-8cb7-c5a7d5986945" class="">In December last year, I worked a bit on something like <a href="https://github.com/mikaelalafriz/lucid-sonic-dreams">lucid-sonic-dreams</a>, paired with the text-to-image idea of CLIP guided GANs. Basically, you give it some music and tell a story in form of a sequence of text inputs. Then you get a music video that interpolates between all the stations of the story in the rhythm of the music. You can try it on pollinations with StyleGAN-3, and there is <a href="https://colab.research.google.com/github/pollinations/hive/blob/main/interesting_notebooks/CLIP_Guided_VQGAN_Dream.ipynb">this notebook</a> for using it with VQ-GAN. Personally I like the motion of the StyleGAN videos better, but the VQ-GAN is certainly better at visualizing the text prompt clearly.</p><p id="91053ad8-0321-428d-aaf6-a4187aca8794" class="">You can find some samples on <a href="https://www.youtube.com/channel/UCBFuL9VjpZAki49fnVi7OHw">youtube</a>, or checkout my favorite: a video for Mawaca - Koi Txangaré with interpolations between different prompts with the suffix “in the style of Hokusai”</p><figure id="941f2c05-5f23-4de5-bf0c-d0248daa46ff"><div class="source"><a href="https://youtu.be/oKw5rjg5GfM">https://youtu.be/oKw5rjg5GfM</a></div></figure></div></p><p id="cf1f1d46-5aab-48b3-8513-8d4607c17b59" class=""><strong>An interactive mandelbrot zoomer - generative art meta</strong><div class="indented"><p id="a573f7dd-5f93-4351-9a97-86e410734534" class="">Click here to start it</p><p id="7eb427be-e71d-4722-9ce0-fa8ddac4bcba" class="">This is an endless zoom of the mandelbrot towards the point you clicked. You can speed it up with <strong>↵</strong>, pause with <strong>⎵</strong> and use <strong>↑ ↓ → ←</strong> to navigate, which is pretty fun.</p><p id="93f769c9-03f6-4800-9b0d-d476aad5fedc" class="">But what is really cool about this, is that the code for the animation was written by <a href="https://openai.com/blog/openai-codex/">open-ai codex</a>. Therefore it is generated code that generates art - beautiful!</p><p id="0e7af2cf-56f1-49e3-9f55-59e660bde528" class="">A year before, <a href="https://github.com/nielsrolf/mandelbrotjs">I implemented the same idea manually</a>, and it took me a week (I am not good at anything frontend). With codex, it took roughly 3 hours and even got much better.</p></div></p><ul id="ff4b9f5a-15bf-44e1-a9e6-5e2db23df2ad" class="toggle"><li><details open=""><summary><strong>A truly amazing poem by GPT-3 imitating A.R. Ammons</strong></summary><p id="8f040f8c-3acb-4415-b649-4511b958b8b6" class="">A cool observation with GPT-3 was that it often comes up with amazing poetry when prompted with “<a href="https://en.wikipedia.org/wiki/A._R._Ammons">A.R. Ammons</a>”. Here is an example:<div class="indented"><p id="c7343f00-f7c0-4d31-954a-993e554bf509" class="">Flowing Water
+by A. R. Ammons
+The river is flowing water.
+It is not water flowing.
+It is not water at all,
+but a moving mass of rock,
+a moving mass of sand,
+a moving mass of clay,
+a moving mass of silt,
+a moving mass of mud.
+The river is flowing water.
+It is not water flowing.
+It is not water at all,
+but a moving mass of life:
+the shad darting,
+the shiners flashing,
+the perch patrolling,
+the bass hovering,
+the catfish dreaming,
+the turtles crawling.
+The river is flowing water.
+It is not water flowing.
+It is not water at all,
+but a moving mass of death:
+the minnows floating,
+the crawdads drifting,
+the leeches glistening,
+the turtles drowning.</p></div></p></details></li></ul></details></li></ul><ul id="a98ff369-43b4-49f7-b49c-2e93d9995728" class="toggle"><li><details open=""><summary>Random</summary><p id="5a81b509-79c4-42a0-99ca-dceedc1b178f" class=""><a href="https://github.com/nielsrolf/HelloWorld"><strong>HelloWorld</strong></a><div class="indented"><p id="e1970e6b-3f39-4c41-bb71-f1e4fb8f71d8" class="">I wanted to try github actions and made a scheduled task that adds nonsense commits to its own repo every evening. It checks how many commits I made that day and adds so many that it says “Hello World!” on my <a href="https://github.com/nielsrolf">green github activity thing</a>. This silly joke might one day turn out to have the best ROI of all my projects because it already made a few people believe that I did more than 7k contributions in one year, and probably my github profile is seen by more potential future employers than any degree.</p></div></p><p id="d5b59a00-b7f1-45fe-b186-54fe3f108621" class=""><a href="https://github.com/nielsrolf/TheGitTrolleyProblem"><strong>TheGitTrolleyProblem</strong></a><div class="indented"><p id="3c994c89-578c-4590-8bb6-49b363b55ae9" class="">This is a joke about git and the trolley problem. I like the trolley problem and memes about it because I am into utilitarianism.</p></div></p></details></li></ul><ul id="2020044b-656c-4960-97ba-0f36a768342e" class="toggle"><li><details open=""><summary>Only Machine Learning / Data</summary><p id="7d83eace-4d3d-45b7-bccf-6de6c49540f9" class=""><strong>Interpretable image classifiers: LRP</strong><div class="indented"><p id="bf27de32-b08b-4f65-b8e6-25e1ca7819cc" class="">LRP is a technique to visualize “what is important” to a neural network that classified a given image into a certain class. It does so by creating a heatmap, where pixels are colored according to their contribution to the class-specific score. I wrote my bachelor thesis about this technique and implemented it in the <a href="https://github.com/nielsrolf/tensorflow-lrp">old tensorflow</a> and in <a href="https://github.com/nielsrolf/pytorch-lrp">pytorch</a>. I actually don’t believe anymore that heatmaps are a suitable way to visualize what is important for a decision, because I believe one cannot assign a relevance value to a pixel: in a HQ photo of a car, no individual pixel is relevant to recognize the car, but all pixels combined obviously hold all the information. Such a context-awareness necessarily gets lost when relevance is thought of as a property of an individual pixel. A better approach would be to define a number of features (pixels) first and ask how much knowledge of these features changes the expected prediction, given all other features. So basically</p><p id="1e9e3255-7dda-4a6c-9d0f-d7e8c399e21a" class=""><em>Loss(prediction of actual sample, prediction of sample where some features are estimated from the other features)</em></p></div></p><ul id="cc09d84b-6daa-4858-a66e-f47dcd86ddd6" class="toggle"><li><details open=""><summary><a href="https://github.com/nielsrolf/ImageTranscription"><strong>A cheap approach to image transcription with pretrained models (CLIP &amp; GPT-2)</strong></a></summary><p id="53f103ca-6aba-41b6-bc93-24e606cf499d" class="">CLIP + GPT transcribe images: GPT proposes how to continue, CLIP decides which proposal to use, continue</p><figure id="b7c84c7e-688a-461f-ae3c-39aa5635e42c" class="image"><a href="%5BNiels%20Warncke%5D%20b7c84c7e688a461fae3c39aa5635e42c/Untitled.png"><img style="width:640px" src="%5BNiels%20Warncke%5D%20b7c84c7e688a461fae3c39aa5635e42c/Untitled.png"/></a></figure><p id="e1d166fc-1e9b-40f1-8be0-17f816fbfef4" class="">becomes:</p><p id="5f490b2b-8b37-4245-81ac-f83ac05ca5a1" class="">This photo shows two bodies of a cat (seen on Flickr, April 2011) carrying a knife</p></details></li></ul><ul id="4327e414-28ff-41e6-9506-5611c37093a2" class="toggle"><li><details open=""><summary><strong>Visualizing the shape of a decision surface of an image classifiers</strong></summary><p id="2b984207-225e-45ab-baf1-d939cfaf6f0c" class="">When I started to deal with neural networks, I wanted to see the shape of their decision boundary. Therefore I took an MNIST classifier and sampled images on 2d hyperplanes (images that are just two images overlayed with varying intensity), passed them through the network, and got a prediction. The predictions are then plotted as color on a 2d grid that is the image hyperplane. Additionally, the hyperplane can move along a third dimension. Such an output is visualized below. It does not really tell us much, but I find it satisfying to ‘see’ the function learned by the neural network in this way.</p><figure id="d695cf72-bdb5-4e0e-a529-8ce524b24201"><div class="source"><a href="%5BNiels%20Warncke%5D%20b7c84c7e688a461fae3c39aa5635e42c/decision-boundary-on-moving-plane_(1).mp4">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/426770f9-8344-450c-be61-56c1746a2d7b/decision-boundary-on-moving-plane_(1).mp4</a></div></figure></details></li></ul><p id="817891b9-aceb-4364-8f37-911aae7123ec" class=""><a href="https://github.com/nielsrolf/InformationBottleneckTree/blob/master/slides/main.pdf"><strong>InformationBottleneckTree</strong></a><div class="indented"><p id="b5230d3c-f3b1-424a-bd16-27f5beefe386" class="">Decision trees can be trained with an objective inspired by the information bottleneck principle. This is much easier than training neural networks with such an objective, as it requires to compute the mutual information between the input and the output of a model. This is simple with decision trees because the prediction simply indicates membership to one out of many leaves, while it is really hard for a neural network that deals with continuous vectors. Surprisingly, this from scratch implementation even gets better results on the IRIS flower dataset than the default sklearn decision tree.</p></div></p><p id="35f12e21-817f-42ec-a9db-7228f42d835e" class=""><a href="https://github.com/nielsrolf/whatsapp-stats"><strong>WhatsApp Statistics</strong></a><div class="indented"><p id="47bf057f-8975-4d52-a9dd-7d08a791132f" class="">Before I learned how to use pandas, I analyzed an export of my WhatsApp user data with some really weird code, but it did the job and plotted a lot of stuff about my conversations. For quite some time now I want to do this again for many types of data exports - like songs I listened to at a certain time, combined with various messenger data to show who I was texting a lot at that time, and so on. It is a bit crazy that this does not really exist yet - all websites must implement a function to export all user data, but there are no tools to analyze all these exports.</p></div></p></details></li></ul><ul id="946d99eb-1ff3-4f94-8380-cb2526e8ef5b" class="toggle"><li><details open=""><summary>Failed approaches</summary><p id="077f2e4d-534a-4679-bc05-fbbcc5d1f85b" class="">I have much more “failed” projects than successful ones - where I tried something which turned out to not work, at least not with the amount I’ve put into. I thought most of them were promising ideas before being tried, and that they did not work is also an insight.</p><p id="a84d99a7-001b-4c25-a15a-54efdec75ac0" class=""><strong>Text to Audio: </strong><a href="https://github.com/pollinations/CLIPTranslate"><strong>AudioCLIP guided SIREN</strong></a><div class="indented"><p id="8b775900-8d51-49ca-90f2-73125f3381bd" class="">Remember <a href="https://github.com/lucidrains/deep-daze">deep-daze</a>? It was one of the first approaches to generate images from texts using the gradients of CLIP. It works by optimizing a SIREN - a neural network that only memorizes or encodes one single image. When <a href="https://github.com/AndreyGuzhov/AudioCLIP">AudioCLIP</a> was released, my friend and I did the same for a SIREN that encodes an audio instead of an image. This seemed promising because it has been shown that a SIREN is easy and fast to optimize if the objective is to copy a given audio, and therefore it seemed like they are just as good of an audio prior as of one for images. However, the generated audios always sounded really noisy, like <a href="https://soundcloud.com/nielsrolf/audioclip-bird">this one with the prompt “bird”</a>.</p></div></p><p id="881fad3f-2321-4b72-a36a-b27e9d440615" class=""><a href="https://github.com/nielsrolf/VariationalAnnealingAutoEncoder/blob/master/VariationalAnnealingAutoEncoder.ipynb"><strong>VariationalAnnealingAutoencoder</strong></a><div class="indented"><p id="0b65f039-17d0-4d1f-aa81-183bf7675ae5" class="">Experiments with autoencoders that use channelwise softmax + noise in the bottleneck, making them describe data by approximate discrete labels - in their spirit similar to VQ-VAEs, but before those were released.</p></div></p><p id="41db0685-9ddc-412d-ad02-1949b7f6edfe" class=""><a href="https://gist.github.com/nielsrolf/ca373a1a5041f4dee24ac1cd99b76a3a"><strong>GradientGenerator</strong></a><div class="indented"><p id="0307c15e-7209-4c2c-b25c-3456d6f1af27" class="">DeepDaze and Latent2Visions and the like demostrated, that the gradients of a classifier can be used to generate data. So I thought let&#x27;s use the gradients of a discriminator as a replacement for a generator in a GAN. This results in some kind of self-adversarial training, where a single discriminator is trained to discriminate fake an real data, but also used to generate the fake data. If this would work, it would be a bit of mixture between GANs and diffusion models, because the generation process is diffusion-like (starting from noise that is iteratively transformed into an image). I tried this on Fashion MNIST with a tiny resnet discriminator and I am still a bit disappointed that it did not really work.</p></div></p><p id="7a5eefa9-1648-4bcd-ba4f-ec05efdc9721" class=""><a href="https://gist.github.com/nielsrolf/791860d26068e80915ed7b4340a9580a"><strong>Classify By Reconstruction Error</strong></a><div class="indented"><p id="94bbe33a-e451-44a9-a4b0-b077b87c45a7" class="">Idea: use an autoencoder-like architecture that generates one reconstruction per class, and the reconstruction for the correct class shall be good and for all other classes bad. If this leads to a good classifier (it does), we can get an explanation for the class that is predicted by looking at the reconstructions (but actually it looks like random noise)</p></div></p></details></li></ul></details></li></ul><ul id="742a3dc4-264f-4938-b966-9645a35be04b" class="toggle"><li><details open=""><summary>Education 🏫</summary><p id="77aa5a61-510f-4016-bcbe-384233124cf0" class=""><strong>Computer Science, Master of Science @ Technische Universität Berlin</strong></p><p id="26cfbf46-0e10-4e25-9499-ddd8ad1099ab" class="">2017 - 2021, Berlin<div class="indented"><p id="5ce7ddd7-cf4d-4102-9b8d-82aa832ca428" class="">Thesis: ”Transfer Learning for Autoencoders on Audio Data”</p><p id="72c48b41-6534-4e16-81a4-d77832ad8dc1" class="">GPA: 1.0 (best possible grade)</p></div></p><p id="acd4f1cd-c11d-487a-aa9c-6ac484626eb3" class=""><strong>Computer Science, Bachelor of Science @ Technische Universität Berlin</strong></p><p id="b8704c6d-a46d-43c1-b9f9-0ecd952ec9b1" class="">2014 - 2018, Berlin<div class="indented"><p id="eac43068-c559-4598-b5f4-19bf2023c0c7" class="">Thesis: ”On the Convergence of Neural Network Predictions and their Explanations”</p><p id="1f1a549f-008a-40e4-8c25-93cb18b30edf" class="">GPA: 1.6</p></div></p><p id="0ba4b282-2d27-4637-8471-2ad0b83dd0b8" class=""><strong>MINT, Orientation studies @ Technische Universität Berlin</strong></p><p id="18d0c170-d7d9-4c48-8a0c-b9670f4ebae6" class="">2013 - 2014, Berlin<div class="indented"><p id="29467734-6d2f-4003-b5c6-2128c65dac98" class="">Courses in Mathematics, Engineering, Computer Science and Physics
+School</p></div></p><p id="87be17bd-e410-4a38-b035-dfdf0cb3b18b" class=""><strong>St. Lioba Schule Bad Nauheim</strong></p><p id="c3acfa87-ac3b-41c4-8599-8e7dffd85f01" class="">2005 - 2013, Bad Nauheim<div class="indented"><p id="48b2575f-8190-475a-890a-a23fa90a09ce" class="">GPA: 1.0 (best possible grade) in Abitur</p><p id="8a669e96-b86e-43ae-a176-e0ec9af56924" class="">Main subjects: Mathematics, Chemistry</p></div></p></details></li></ul><ul id="d1e18920-5b4a-4323-9df8-5e80d866541a" class="toggle"><li><details open=""><summary>Work Experience 💼</summary><p id="563f8f05-2ba6-4415-8e62-11f4106363f2" class=""><strong>Data Scientist @ LEAD Machine Learning GmbH</strong></p><p id="9ba9101a-c957-400e-aa1b-aa8482423b33" class="">July 2021 - Present, Berlin<div class="indented"><p id="553dd4b5-8350-4150-8b70-b1988fb8abbe" class="">Working on the development and deployment of machine learning models for various client projects. Besides technical tasks, my role also includes talking to clients and understanding their needs.</p></div></p><p id="e9ef1c16-616d-4bb8-9060-b62c747f8f32" class=""><strong>Machine Learning Specialist, Working Student @ Porsche Digital</strong></p><p id="985ec67e-b02d-467e-afd6-72f971ee0da6" class="">May 2019 - June 2021, Berlin<div class="indented"><p id="38c1528a-5b4b-4d8c-82c8-e724ae73fa70" class="">Focus of my work was the development of machine learning models in the context of anomaly detection for audio data. Besides, I developed internal tools for data management as well as an interactive dashboard for data exploration.</p></div></p><p id="50ab93ba-9aa9-4f98-b4b0-8d0f88efc193" class=""><strong>Research and Teaching Assistant @ Technical University Berlin</strong></p><p id="946a9e22-4aba-4cf6-8bca-51238ee906a3" class="">March 2017 - April 2019, Berlin<div class="indented"><p id="5b326a51-9aa6-40a7-9b15-a68f8dcc1882" class="">I was a teaching assistant at the Machine Learning Group of Prof. Klaus-Robert Müller at TU Berlin. My tasks included grading of homework assignments for the courses ”Machine Learning 1”, ”Machine Learning 2” and ”Python for Machine Learning”. I also supported research on interpretability of deep neural networks using a technique called Layerwise Relevance Propagation.</p></div></p><p id="446f1191-3234-4a18-a322-c68f1b334b93" class=""><strong>Contract Developer @ Firlefanz GmbH</strong></p><p id="a43bc612-77b6-44cc-8582-3551c1f4fff0" class="">March 2019 - July 2019<div class="indented"><p id="7bf1b060-06ef-4a34-a3aa-a483ad24f548" class="">Firlefanz GmbH is the organizer of the Feel Festival close to Berlin with approximately 10000 visitors. As their single developer, I created an Android and iOS app that allowed users to browse the timetable, create a personal schedule, see themselves on an interactive map and send feedback to the organizers. The app did not work very smoothly and has a horrible rating in the app stores, but in my defense, it was originally planned 90% less features and I did not know javascript when I started.</p></div></p><p id="75798dcf-18da-41d5-acfd-9f2013c62ae5" class=""><strong>Contract Developer @ cohooyo.com</strong></p><p id="c9a4639c-e85d-4b5d-99ce-cb9aa18563d9" class="">January 2017 - July 2019<div class="indented"><p id="1f292d89-c801-4551-ad28-4616c6cf79b6" class="">cohooyo.com was a job searching platform founded in cooperation of one other developer, me and Falkenstein Personalberatung. I was responsible for the development and deployment of the first version of the backend.</p></div></p></details></li></ul><p id="d2a4454d-1b1a-4ec7-8071-7c341bc411f7" class="">
+</p></div></article></body></html>
